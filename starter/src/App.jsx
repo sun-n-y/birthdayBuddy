@@ -1,27 +1,20 @@
 import { useState } from 'react';
 import data from './data';
+import List from './components/List';
+import Person from './components/Person';
 
 const App = () => {
-  const [person, setPerson] = useState(data);
-  const numBirthdays = person.length;
+  const [people, setPeople] = useState(data);
+  const numBirthdays = people.length;
   const handleClick = () => {
-    setPerson([]);
+    setPeople([]);
   };
   return (
     <main>
       <div className="container">
         <h3>{numBirthdays} birthdays today</h3>
-        {person.map((item) => {
-          const { id, name, age, image } = item;
-          return (
-            <div className="person" key={id}>
-              <img src={image} alt="" />
-              <h4>{name}</h4>
-              <p>{age}</p>
-            </div>
-          );
-        })}
-        <button className="btn" onClick={handleClick}>
+        <List people={people} />
+        <button type="button" className="btn btn-block" onClick={handleClick}>
           clear all
         </button>
       </div>
